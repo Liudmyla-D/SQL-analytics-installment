@@ -27,6 +27,29 @@ An e-commerce store sells phones via installment plans. We need fast, reproducib
 
 ---
 
+## Data dictionary
+
+| Table                 | Column           | Type          | Description                                |
+|----------------------|------------------|---------------|--------------------------------------------|
+| dbo.installment_plan | merchant_id      | TINYINT       | Seller ID (part of composite key)          |
+|                      | contract_number  | INT           | Contract number per merchant (part of PK)  |
+|                      | client_id        | INT           | Client identifier                           |
+|                      | phone_id         | INT           | Phone/model identifier                      |
+|                      | color_id         | TINYINT       | Color identifier                            |
+|                      | price            | NUMERIC(10,2) | Contract total price (optional)             |
+|                      | date_purch       | DATE          | Purchase / first installment date           |
+|                      | qu_inst          | INT           | Number of installments (months)             |
+|                      | inst             | INT           | Monthly installment amount (UAH)            |
+| dbo.payments         | merchant_id      | TINYINT       | Seller ID (FK to installment_plan)          |
+|                      | contract_number  | INT           | Contract number (FK to installment_plan)    |
+|                      | date_payment     | DATE          | Actual payment date                          |
+|                      | payment          | INT           | Paid amount (UAH)                            |
+
+**Composite key:** (`merchant_id`, `contract_number`) on `dbo.installment_plan`.  
+**FK:** `dbo.payments` → `dbo.installment_plan` by (`merchant_id`, `contract_number`).
+
+---
+
 ## Schema (DDL)
 See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_indexes.sql`.
 
@@ -92,6 +115,17 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 <img src="images/contract_details.png" alt="Contract details" width="800">
 <img src="images/contract_summary.png" alt="Contract summary" width="800">
 <img src="images/portfolio_summary.png" alt="Portfolio summary" width="800">
+
+---
+
+## Sample output (Excel)
+Download: [`InstallmentReports_2020-04_anonymized.xlsx`](artifacts/InstallmentReports_2020-04_anonymized.xlsx)
+
+Sheets:
+- `contract_details` — output of `sql/02_contract_details.sql`
+- `contract_payments` — output of `sql/03_contract_payments.sql`
+- `contract_summary` — output of `sql/04_contract_summary.sql`
+- `portfolio_summary` — output of `sql/05_portfolio_debt_summary.sql`
 
 ---
 
