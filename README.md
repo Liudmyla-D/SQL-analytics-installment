@@ -79,9 +79,8 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 ## SQL highlights
 - Point-in-time logic with a parameterized `@reporting_date`
 - Month arithmetic (`DATEDIFF`, capping expected installments at `qu_inst`)
-- Reusable month generator: `util/my_period.sql`
+- Reusable month generator: [util/my_period.sql](util/my_period.sql)
 - Clean aggregations for overdue **buckets 0/1/2/3/4+** (counts + debt)
-- [my_period.sql](util/my_period.sql)
 
 ---
 
@@ -102,6 +101,8 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
   90_validation_checks.sql
 /data
 /images
+/artifacts
+  InstallmentReports_2020-04_anonymized.xlsx
 
 ```
 
@@ -116,13 +117,8 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 - [06_constraints_indexes.sql](sql/06_constraints_indexes.sql)
 - [02_import_notes.md](scripts/02_import_notes.md)
 - [90_validation_checks.sql](scripts/90_validation_checks.sql)
-
 ---
-
 ## Screenshots
-
-
-
 **SSMS** – contract details / summary / portfolio
 
 <img src="images/contract_details.png" alt="Contract details" width="800">
@@ -144,6 +140,20 @@ Sheets:
 - `contract_payments` — output of `sql/03_contract_payments.sql`
 - `contract_summary` — output of `sql/04_contract_summary.sql`
 - `portfolio_summary` — output of `sql/05_portfolio_debt_summary.sql`
+
+---
+
+## Sample data (CSV)
+Small anonymized inputs to try the scripts quickly:
+
+- [`data/installment_plan_sample.csv`](data/installment_plan_sample.csv)
+- [`data/payments_sample.csv`](data/payments_sample.csv)
+
+**Notes**
+- Separator: `,` (comma). Encoding: UTF-8.
+- Date format: `yyyy-mm-dd`.
+- Composite key for contracts = (`merchant_id`, `contract_number`).
+- You can import via SSMS Import Wizard or `BULK INSERT` (see `scripts/02_import_notes.md`).
 
 ---
 
