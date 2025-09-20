@@ -52,36 +52,49 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 
 ## Repository structure
 
+```
 /sql
-01_schema.sql
-02_contract_details.sql
-03_contract_payments.sql
-04_contract_summary.sql
-05_portfolio_debt_summary.sql
-06_constraints_indexes.sql
+  01_schema.sql
+  02_contract_details.sql
+  03_contract_payments.sql
+  04_contract_summary.sql
+  05_portfolio_debt_summary.sql
+  06_constraints_indexes.sql
 /util
-my_period.sql
+  my_period.sql
 /scripts
-02_import_notes.md
-90_validation_checks.sql
+  02_import_notes.md
+  90_validation_checks.sql
 /data
 /images
 
+```
+
+## SQL files (quick links)
+- [01_schema.sql](sql/01_schema.sql)
+- [02_contract_details.sql](sql/02_contract_details.sql)
+- [03_contract_payments.sql](sql/03_contract_payments.sql)
+- [04_contract_summary.sql](sql/04_contract_summary.sql)
+- [05_portfolio_debt_summary.sql](sql/05_portfolio_debt_summary.sql)
+- [06_constraints_indexes.sql](sql/06_constraints_indexes.sql)
+- [02_import_notes.md](scripts/02_import_notes.md)
+- [90_validation_checks.sql](scripts/90_validation_checks.sql)
 
 ---
 
-## Screenshots
-Add 2–4 PNGs into `/images` and reference them here:
-- `![Contract details](images/contract_details.png)`
-- `![Payments ledger](images/contract_payments.png)`
-- `![Contract summary](images/contract_summary.png)`
-- `![Portfolio summary](images/portfolio_summary.png)`
+<h2>Screenshots</h2>
+<img src="images/contract_details.png" alt="Contract details" width="800">
+<img src="images/contract_summary.png" alt="Contract summary" width="800">
+<img src="images/portfolio_summary.png" alt="Portfolio summary" width="800">
 
 ---
+
+## Environment
+- SQL Server 2019+ (tested on 2019/2022; compatible with Azure SQL)
+- SSMS 20.x (or 19+)
 
 ## License
 MIT.
 
 ## Credits
 Implementation and documentation by **Liudmyla Sibikovska**.
-
