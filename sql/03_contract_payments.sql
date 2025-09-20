@@ -1,8 +1,7 @@
 /* I.2 Month-by-month payments ledger + first expected installment flag (i_htbp) */
-
 DECLARE @reporting_date DATE = '2020-04-30';
-DECLARE @merchant_id INT = 67;                                                                      -- example: 67 / 84 / 44
-DECLARE @contract_number INT = 227;                                                                 -- example: 227 / 228 / 1229
+DECLARE @merchant_id INT = 67;                                              -- examples to test: 67 / 84 / 44
+DECLARE @contract_number INT = 227;                                         -- examples to test: 227 / 228 / 1229
 
 SELECT 
   i.merchant_id,
@@ -17,11 +16,11 @@ SELECT
     AND (YEAR(DATEADD(MONTH, i.qu_inst-1, i.date_purch))*100 + MONTH(DATEADD(MONTH, i.qu_inst-1, i.date_purch)))
           >= (a.p_year*100 + a.p_month)
     THEN i.inst ELSE 0
-  END AS i_htbp,                                                                                    -- first expected payment in a month
+  END AS i_htbp,                                                          -- first expected installment for the month
   ISNULL(CONVERT(nvarchar(10), p.date_payment, 104), '') AS date_payment,
   ISNULL(p.payment, 0) AS payment
 FROM dbo.installment_plan i
-CROSS APPLY dbo.my_period('2018-01-01','2020-04-30') a
+CROSS APPLY dbo.my_period('2018-01-01','2020-04-30') a                   -- month generator (year, month)
 LEFT JOIN dbo.payments p
   ON p.merchant_id     = i.merchant_id
  AND p.contract_number = i.contract_number
