@@ -1,5 +1,11 @@
 # Installment Plans — SQL Analytics Project
 
+![T-SQL](https://img.shields.io/badge/SQL-T--SQL-informational)
+![SQL Server](https://img.shields.io/badge/DB-SQL%20Server-red)
+![SSMS 20.x](https://img.shields.io/badge/Client-SSMS%2020.x-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+
+
 SQL Server project that analyzes phone installment **contracts** and **payments** at a fixed **reporting date** (point-in-time).  
 Outputs include: expected vs. paid amounts, **debt** due to missed/underpaid installments, and **overdue buckets** (0/1/2/3/4+ months).
 
