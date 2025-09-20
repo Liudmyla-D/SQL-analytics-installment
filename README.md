@@ -95,6 +95,12 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 
 ---
 
+### Excel
+<img src="images/excel_contract_pack.png" alt="Excel: single-contract (details, ledger, summary)" width="800">
+<img src="images/excel_portfolio_summary.png" alt="Excel: portfolio summary" width="800">
+
+---
+
 ## Environment
 - SQL Server 2019+ (tested on 2019/2022; compatible with Azure SQL)
 - SSMS 20.x (or 19+)
