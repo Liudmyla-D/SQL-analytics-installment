@@ -23,8 +23,6 @@ An e-commerce store sells phones via installment plans. We need fast, reproducib
 - `dbo.installment_plan` — master contracts: `merchant_id`, `contract_number`, `client_id`, `phone_id`, `color_id`, `price`, `date_purch`, `qu_inst`, `inst`
 - `dbo.payments` — payment facts: `merchant_id`, `contract_number`, `date_payment`, `payment`
 
-**Composite key**: (`merchant_id`, `contract_number`).
-
 ---
 
 ## Data dictionary
@@ -71,11 +69,19 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 
 ---
 
+**Parameters used in reports**
+- `@reporting_date` (DATE) — snapshot date (default `2020-04-30`)
+- `@merchant_id` (INT) — seller for single-contract reports
+- `@contract_number` (INT) — contract number for single-contract reports
+
+---
+
 ## SQL highlights
 - Point-in-time logic with a parameterized `@reporting_date`
 - Month arithmetic (`DATEDIFF`, capping expected installments at `qu_inst`)
 - Reusable month generator: `util/my_period.sql`
 - Clean aggregations for overdue **buckets 0/1/2/3/4+** (counts + debt)
+- [my_period.sql](util/my_period.sql)
 
 ---
 
@@ -99,6 +105,8 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 
 ```
 
+---
+
 ## SQL files (quick links)
 - [01_schema.sql](sql/01_schema.sql)
 - [02_contract_details.sql](sql/02_contract_details.sql)
@@ -111,10 +119,20 @@ See `sql/01_schema.sql`. Optional constraints & index: `sql/06_constraints_index
 
 ---
 
-<h2>Screenshots</h2>
+## Screenshots
+
+
+
+**SSMS** – contract details / summary / portfolio
+
 <img src="images/contract_details.png" alt="Contract details" width="800">
 <img src="images/contract_summary.png" alt="Contract summary" width="800">
 <img src="images/portfolio_summary.png" alt="Portfolio summary" width="800">
+
+**Excel** – single-contract pack / portfolio summary
+
+<img src="images/excel_contract_pack.png" alt="Excel: single-contract (details, ledger, summary)" width="800">
+<img src="images/excel_portfolio_summary.png" alt="Excel: portfolio summary" width="800">
 
 ---
 
@@ -126,12 +144,6 @@ Sheets:
 - `contract_payments` — output of `sql/03_contract_payments.sql`
 - `contract_summary` — output of `sql/04_contract_summary.sql`
 - `portfolio_summary` — output of `sql/05_portfolio_debt_summary.sql`
-
----
-
-### Excel
-<img src="images/excel_contract_pack.png" alt="Excel: single-contract (details, ledger, summary)" width="800">
-<img src="images/excel_portfolio_summary.png" alt="Excel: portfolio summary" width="800">
 
 ---
 
